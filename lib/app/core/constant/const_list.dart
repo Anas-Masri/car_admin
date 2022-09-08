@@ -10,5 +10,4 @@ List<String> categoryList = [
   "Sport car",
   "Van",
   "Pickup",
-  "Roadster",
-];
+  "Roadster",];

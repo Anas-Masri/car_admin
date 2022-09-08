@@ -153,7 +153,10 @@ class CarController extends GetxController {
 
   bool isfavorate() {
     User user = StorageServices().getUser()!;
-
-    return true;
+    if (isSelected) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
