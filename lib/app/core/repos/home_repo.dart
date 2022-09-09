@@ -26,7 +26,6 @@ class HomeRepo {
       );
 
       log(queryParameters.toString());
-      log(response.data.toString());
 
       return Car.carList(response.data);
     } catch (e) {

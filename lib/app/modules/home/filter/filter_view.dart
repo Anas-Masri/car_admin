@@ -77,6 +77,7 @@ class FilterView extends GetView<FilterController> {
                           }
                         } else {
                           return CarCardWidget(
+                            isfavorate: false,
                             car: controller.cars[index],
                           );
                         }

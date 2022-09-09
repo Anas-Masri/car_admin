@@ -151,8 +151,14 @@ class CarController extends GetxController {
     }
   }
 
-  bool isfavorate() {
+  bool isfavorate(int index) {
     User user = StorageServices().getUser()!;
-    return true;
+    for (Car car in user.cars) {
+      if (car.id == carList[index].id) {
+        return true;
+      }
+    }
+    update();
+    return false;
   }
 }

@@ -88,7 +88,10 @@ class CarView extends GetView<CarController> {
                             return const SizedBox();
                           }
                         } else {
-                          return CarCardWidget(car: controller.carList[i]);
+                          return CarCardWidget(
+                            car: controller.carList[i],
+                            isfavorate: controller.isfavorate(i),
+                          );
                         }
                       },
                       separatorBuilder: (context, i) {

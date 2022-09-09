@@ -19,6 +19,7 @@ class CarDetailsController extends GetxController {
   late Car car;
   PageController pageController = PageController();
   CarDetailsState widgetButtonState = CarDetailsState.add;
+
   @override
   void onInit() {
     car = Get.arguments["car"];

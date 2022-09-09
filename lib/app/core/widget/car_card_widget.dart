@@ -5,8 +5,10 @@ import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:get/get.dart';
 
 class CarCardWidget extends StatelessWidget {
-  const CarCardWidget({required this.car, Key? key}) : super(key: key);
+  CarCardWidget({required this.car, required this.isfavorate, Key? key})
+      : super(key: key);
   final Car car;
+  bool isfavorate = false;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -78,10 +80,13 @@ class CarCardWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Padding(
-                padding: EdgeInsets.only(right: 15, top: 15),
-                child: Icon(FontAwesome.heart, color: Colors.grey),
+                padding: const EdgeInsets.only(right: 15, top: 15),
+                child: Icon(
+                  FontAwesome.heart,
+                  color: isfavorate ? Colors.red : Colors.grey,
+                ),
               ),
             ],
           ),
