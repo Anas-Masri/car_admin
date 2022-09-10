@@ -4,6 +4,7 @@ import 'package:car_admin/app/core/enums/widget_state_enum.dart';
 import 'package:car_admin/app/core/widget/custom_text_field.dart';
 import 'package:car_admin/app/modules/home/add_new_car/add_new_car_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 
 class AddNewCarView extends GetView<AddNewCarController> {
@@ -151,24 +152,14 @@ class AddNewCarView extends GetView<AddNewCarController> {
                                   builder: (_) {
                                     return GetBuilder<AddNewCarController>(
                                         id: "changeColor",
-                                        builder: (context) {
+                                        builder: (_) {
                                           return ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor:
                                                       Colors.blue[900]),
-                                              onPressed: controller
-                                                          .widgetState ==
-                                                      WidgetState.loading
-                                                  ? null
-                                                  : () {
-                                                      if (formkey.currentState!
-                                                          .validate()) {
-                                                        controller
-                                                            .patchUserDetails();
-                                                      } else {
-                                                        log("error from validate");
-                                                      }
-                                                    },
+                                              onPressed: () {
+                                                pickColor(context);
+                                              },
                                               child: controller.widgetState ==
                                                       WidgetState.loading
                                                   ? const CircularProgressIndicator()
@@ -177,11 +168,32 @@ class AddNewCarView extends GetView<AddNewCarController> {
                                   }),
                             ),
                             SizedBox(
+                              //decoration: ShapeDecoration.fromBoxDecoration(BoxDecoration(border: BoxBorder())  ),
                               height: 40,
                               width: MediaQuery.of(context).size.width / 3,
                               child: ElevatedButton(
-                                onPressed: controller.logout,
-                                child: const Text("Log Out"),
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(11)),
+                                    backgroundColor: Colors.white,
+                                    side: BorderSide(
+                                        width: 2, color: Colors.blue[800]!)),
+                                onPressed: () async {
+                                  controller.pickImages();
+                                },
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Icon(Icons.image_search_sharp,
+                                        color: Colors.blue[800]),
+                                    Text(
+                                      "Add image",
+                                      style: TextStyle(color: Colors.blue[800]),
+                                    ),
+                                  ],
+                                ),
                               ),
                             )
                           ],
@@ -195,21 +207,29 @@ class AddNewCarView extends GetView<AddNewCarController> {
               }
             }));
   }
-}
- /* void pickColor(BuildContext context) {
-    showDialog (
+
+  pickColor(BuildContext context) {
+    showDialog(
         context: context,
-        builder: (context){
-         AlertDialog(
+        builder: (context) {
+          return AlertDialog(
             title: const Text("select color car"),
-            content: SingleChildScrollView(child: ColorPicker(
-        pickerColor: controller.pickercolor,
-        onColorChanged: controller.changeColor,
+            content: SingleChildScrollView(
+              child: ColorPicker(
+                pickerColor: controller.pickercolor,
+                onColorChanged: controller.changeColor,
               ),
-
-          )
+            ),
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    controller.changeColor(controller.pickercolor);
+                    Navigator.of(context).pop();
+                    log(controller.pickercolor.toString());
+                  },
+                  child: const Text("select"))
+            ],
           );
-  });
-  
-
-*/
+        });
+  }
+}

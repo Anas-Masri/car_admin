@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:car_admin/app/core/enums/widget_state_enum.dart';
 import 'package:car_admin/app/core/models/user_model.dart';
@@ -6,14 +9,17 @@ import 'package:car_admin/app/core/services/error_handler.dart';
 import 'package:car_admin/app/core/services/storage_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddNewCarController extends GetxController {
   AddNewCarController({
     required this.homeRepo,
     required this.storageServices,
   });
+  final ImagePicker picker = ImagePicker();
   HomeRepo homeRepo;
   late User user;
+  File? image;
   Color pickercolor = Colors.white;
   StorageServices storageServices;
   late TextEditingController fullNameController;
@@ -76,5 +82,19 @@ class AddNewCarController extends GetxController {
   void changeColor(Color color) {
     pickercolor = color;
     update(["changeColor"]);
+  }
+
+  Future<void> pickImages() async {
+    try {
+      final image = await picker.pickImage(source: ImageSource.gallery);
+      if (image == null) {
+        return;
+      }
+      final imageTemp = File(image.path);
+      this.image = imageTemp;
+      log(imageTemp.toString());
+    } on ErrorHandler catch (e) {
+      BotToast.showText(text: e.errorText);
+    }
   }
 }

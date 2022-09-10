@@ -38,6 +38,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   fluttericon: ^2.0.0
   flutter_colorpicker: ^1.0.3
+  image_picker: ^0.8.5+3
 
 
   # The following adds the Cupertino Icons font to your application.
