@@ -158,7 +158,6 @@ class CarController extends GetxController {
         return true;
       }
     }
-    update();
     return false;
   }
 }

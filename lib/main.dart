@@ -6,6 +6,10 @@ import 'package:car_admin/app/modules/auth/register/register_binding.dart';
 import 'package:car_admin/app/modules/auth/register/register_view.dart';
 import 'package:car_admin/app/modules/auth/wrapper/wrapper_binding.dart';
 import 'package:car_admin/app/modules/auth/wrapper/wrapper_view.dart';
+import 'package:car_admin/app/modules/home/add_new_car/add_new_car_binding.dart';
+import 'package:car_admin/app/modules/home/add_new_car/add_new_car_view.dart';
+import 'package:car_admin/app/modules/home/car_store_list/car_store_list_binding.dart';
+import 'package:car_admin/app/modules/home/car_store_list/car_store_list_view.dart';
 import 'package:car_admin/app/modules/home/car_details/car_details_binding.dart';
 import 'package:car_admin/app/modules/home/car_details/car_details_view.dart';
 import 'package:car_admin/app/modules/home/cars/cars_binding.dart';
@@ -87,6 +91,16 @@ class MyApp extends StatelessWidget {
           name: "/filterPage",
           page: () => FilterView(),
           binding: FilterBinding(),
+        ),
+        GetPage(
+          name: "/CarStoreListPage",
+          page: () => const CarStoreListView(),
+          binding: CarStoreListBinding(),
+        ),
+        GetPage(
+          name: "/AddNewCarPage",
+          page: () => AddNewCarView(),
+          binding: AddNewCarBinding(),
         ),
       ],
     );

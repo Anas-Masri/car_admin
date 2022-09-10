@@ -4,6 +4,7 @@ import 'package:car_admin/app/core/widget/car_card_widget.dart';
 import 'package:car_admin/app/core/widget/custom_text_field.dart';
 import 'package:car_admin/app/modules/home/cars/cars_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,23 @@ class CarView extends GetView<CarController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: InkWell(
+        onTap: () {
+          Get.toNamed("/CarStoreListPage");
+        },
+        child: Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+            color: Colors.blue,
+          ),
+          child: const Icon(
+            FontAwesome5.car_alt,
+            color: Colors.white,
+          ),
+        ),
+      ),
       appBar: AppBar(
         leading: InkWell(
           onTap: () {

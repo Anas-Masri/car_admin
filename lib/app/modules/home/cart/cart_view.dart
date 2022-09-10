@@ -51,22 +51,32 @@ class CartView extends GetView<CartController> {
                     );
                   default:
                     {
-                      return ListView.separated(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                        itemBuilder: (BuildContext context, int index) {
-                          return CarCartWidget(
-                            car: controller.userCars[index],
-                            onDelete: controller.removeCarFromUserCars,
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(
-                            height: 10,
-                          );
-                        },
-                        itemCount: controller.userCars.length,
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        width: double.infinity,
+                        child: RefreshIndicator(
+                          onRefresh: () async {
+                            await controller.getUserCars();
+                          },
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                            itemBuilder: (BuildContext context, int index) {
+                              return CarCartWidget(
+                                car: controller.userCars[index],
+                                onDelete: controller.removeCarFromUserCars,
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return const SizedBox(
+                                height: 10,
+                              );
+                            },
+                            itemCount: controller.userCars.length,
+                          ),
+                        ),
                       );
                     }
                 }

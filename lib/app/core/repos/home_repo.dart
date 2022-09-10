@@ -25,8 +25,6 @@ class HomeRepo {
         queryParameters: queryParameters,
       );
 
-      log(queryParameters.toString());
-
       return Car.carList(response.data);
     } catch (e) {
       throw ErrorHandler("can't get cars");
@@ -113,6 +111,25 @@ class HomeRepo {
     } catch (e) {
       log(e.toString());
       throw ErrorHandler("can't filter car");
+    }
+  }
+
+  Future<List<Car>> getStoreCars({required int skip}) async {
+    try {
+      Map<String, dynamic>? queryParameters = {
+        "skip": skip,
+        "take": 10,
+      };
+
+      Response response = await dio.get(
+        "https://cars-mysql-backend.herokuapp.com/car",
+        queryParameters: queryParameters,
+      );
+
+      return Car.carList(response.data);
+    } catch (e) {
+      log(e.toString());
+      throw ErrorHandler("can't get cars");
     }
   }
 }

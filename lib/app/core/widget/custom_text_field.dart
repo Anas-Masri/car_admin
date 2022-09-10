@@ -6,6 +6,8 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.isBoarderd = false,
     this.isenable = true,
+    this.height = 10,
+    this.maxLines = 1,
     Key? key,
     this.validator,
     required this.controller,
@@ -13,14 +15,15 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
   }) : super(key: key);
   final TextInputType keyboardType;
-  final isBoarderd;
+  final bool isBoarderd;
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
   final String lable;
   final bool isenable;
-
+  final int maxLines;
+  final double height;
   OutlineInputBorder outlineInputBorder() {
     if (isBoarderd) {
       return OutlineInputBorder(
@@ -30,7 +33,7 @@ class CustomTextField extends StatelessWidget {
     } else {
       return OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(15),
       );
     }
   }
@@ -45,10 +48,11 @@ class CustomTextField extends StatelessWidget {
           style: const TextStyle(
               fontSize: 15, fontWeight: FontWeight.w600, color: Colors.black),
         ),
-        const SizedBox(
-          height: 10,
+        SizedBox(
+          height: height,
         ),
         TextFormField(
+          maxLines: maxLines,
           enabled: isenable,
           obscureText: obscureText,
           keyboardType: keyboardType,
